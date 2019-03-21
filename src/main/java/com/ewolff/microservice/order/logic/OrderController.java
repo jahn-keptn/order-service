@@ -71,11 +71,12 @@ class OrderController {
 		// in 50% of the cases we are return an incorrect data item back
 		int n = rand.nextInt(1);
 		if(n==0) {
+			// option 2: throw new Exception("Haha - this is a bad code change");
 			return new ModelAndView("orderForm", "order", null);
-		} else {
-			order.addLine(0, catalogClient.findAll().iterator().next().getItemId());
-			return new ModelAndView("orderForm", "order", order);
-		}	
+		}
+		
+		order.addLine(0, catalogClient.findAll().iterator().next().getItemId());
+		return new ModelAndView("orderForm", "order", order);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
