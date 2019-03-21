@@ -1,6 +1,7 @@
 package com.ewolff.microservice.order.logic;
 
 import java.util.Collection;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,7 @@ class OrderController {
 
 	private CustomerClient customerClient;
 	private CatalogClient catalogClient;
+	private Random rand;
 
 	@Autowired
 	private OrderController(OrderService orderService,
@@ -34,6 +36,8 @@ class OrderController {
 		this.customerClient = customerClient;
 		this.catalogClient = catalogClient;
 		this.orderService = orderService;
+		
+		this.rand = new Random();
 	}
 
 	@ModelAttribute("items")
@@ -64,8 +68,14 @@ class OrderController {
 
 	@RequestMapping(value = "/line", method = RequestMethod.POST)
 	public ModelAndView addLine(Order order) {
-		order.addLine(0, catalogClient.findAll().iterator().next().getItemId());
-		return new ModelAndView("orderForm", "order", order);
+		// in 50% of the cases we are return an incorrect data item back
+		int n = rand.nextInt(1);
+		if(n==0) {
+			return new ModelAndView("orderForm", "order", null);
+		} else {
+			order.addLine(0, catalogClient.findAll().iterator().next().getItemId());
+			return new ModelAndView("orderForm", "order", order);
+		}	
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
