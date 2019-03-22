@@ -16,6 +16,8 @@ import com.ewolff.microservice.order.clients.Customer;
 import com.ewolff.microservice.order.clients.CustomerClient;
 import com.ewolff.microservice.order.clients.Item;
 
+import java.util.Iterator;
+
 @Controller
 class OrderController {
 
@@ -47,16 +49,25 @@ class OrderController {
 
 	@ModelAttribute("customers")
 	public Collection<Customer> customers() {
-		return customerClient.findAll();
+		Collection<Customer> allCustomers = customerClient.findAll();
+		// ************************************************
+		// N+1 Problem
+		// Add additional lookups for each customer
+		// this will cause additional SQL calls
+		// ************************************************
+		Iterator<Customer> itr = allCustomers.iterator();
+		while (itr.hasNext()) {
+			Customer cust = itr.next();
+			long id = cust.getCustomerId();
+			for(int i=1; i<=20; i++){
+				customerClient.getOne(id);
+			}
+		}
+		return allCustomers;
 	}
 
 	@RequestMapping("/")
 	public ModelAndView orderList() {
-		// Adding a slowdown by calling a fibunacci function 10000 times
-		for(int i=1; i<=100000; i++){
-      			fibonacci2(i);
-   		}
-		
 		return new ModelAndView("orderlist", "orders",
 				orderRepository.findAll());
 	}
@@ -68,13 +79,14 @@ class OrderController {
 
 	@RequestMapping(value = "/line", method = RequestMethod.POST)
 	public ModelAndView addLine(Order order) {
-		// in 50% of the cases we are return an incorrect data item back
+		// ************************************************
+		// in 50% of the cases will return incorrect data
+		// back resulting in a 500 error in the UI
+		// ************************************************
 		int n = rand.nextInt(1);
 		if(n==0) {
-			// option 2: throw new Exception("Haha - this is a bad code change");
 			return new ModelAndView("orderForm", "order", null);
 		}
-		
 		order.addLine(0, catalogClient.findAll().iterator().next().getItemId());
 		return new ModelAndView("orderForm", "order", order);
 	}
@@ -96,18 +108,4 @@ class OrderController {
 
 		return new ModelAndView("success");
 	}
-
-	 public int fibonacci2(int number){
-    		if(number == 1 || number == 2) {
-      			return 1;
-    		}
-    		int fibo1=1, fibo2=1, fibonacci=1;
-    		for(int i= 3; i<= number; i++){
-      			//Fibonacci number is sum of previous two Fibonacci number
-      			fibonacci = fibo1 + fibo2;
-      			fibo1 = fibo2;
-      			fibo2 = fibonacci;
-    		}
-    		return fibonacci; //Fibonacci number
-  	}
 }
