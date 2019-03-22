@@ -83,7 +83,7 @@ class OrderController {
 		// in 50% of the cases will return incorrect data
 		// back resulting in a 500 error in the UI
 		// ************************************************
-		int n = rand.nextInt(1);
+		int n = rand.nextInt(2);
 		if(n==0) {
 			return new ModelAndView("orderForm", "order", null);
 		}
