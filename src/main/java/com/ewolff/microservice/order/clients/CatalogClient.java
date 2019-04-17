@@ -39,6 +39,13 @@ public class CatalogClient {
 		super();
 		this.restTemplate = getRestTemplate();
 		this.catalogServiceHost = catalogServiceHost;
+		
+		System.out.println("catalogServiceHost value = ");
+		System.out.println(catalogServiceHost) ;
+		
+		System.out.println("catalogServicePort value = ");
+		System.out.println(catalogServicePort) ;		   
+				   
 		this.catalogServicePort = catalogServicePort;
 	}
 
