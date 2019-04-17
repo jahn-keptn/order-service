@@ -33,20 +33,28 @@ public class CatalogClient {
 	private long catalogServicePort;
 
 	@Autowired
-	public CatalogClient(@Value("${catalog.service.host:catalog}") String catalogServiceHost,
-			@Value("${catalog.service.port:8080}") long catalogServicePort) {
-//	public CatalogClient(@Value("catalog-service") String catalogServiceHost, @Value("8080") long catalogServicePort) {
-//		super();
+//	public CatalogClient(@Value("${catalog.service.host:catalog}") String catalogServiceHost,
+//			@Value("${catalog.service.port:8080}") long catalogServicePort) {
+	public CatalogClient(@Value("catalog-service") String catalogServiceHost, @Value("8080") long catalogServicePort) {
+		super();
 		this.restTemplate = getRestTemplate();
 		this.catalogServiceHost = catalogServiceHost;
+		this.catalogServicePort = catalogServicePort;
+		
+		System.out.println("======================================================");
+		System.out.println("catalog.service.host:catalog value = ");
+		System.out.println("${catalog.service.host:catalog}") ;
 		
 		System.out.println("catalogServiceHost value = ");
 		System.out.println(catalogServiceHost) ;
 		
+		System.out.println("======================================================");
+		System.out.println("catalog.service.port:8080 value = ");
+		System.out.println("${catalog.service.port:8080}") ;
+		
 		System.out.println("catalogServicePort value = ");
-		System.out.println(catalogServicePort) ;		   
-				   
-		this.catalogServicePort = catalogServicePort;
+		System.out.println(catalogServicePort) ;	
+		System.out.println("======================================================");
 	}
 
 	protected RestTemplate getRestTemplate() {
