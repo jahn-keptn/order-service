@@ -45,12 +45,24 @@ public class CatalogClient {
 		System.out.println("catalog.service.host:catalog value = ");
 		System.out.println("${catalog.service.host:catalog}") ;
 		
+		System.out.println("catalog-service.service.host value = ");
+		System.out.println("${catalog-service.service.host}") ;
+		
+		System.out.println("catalog-service.service.host:catalog value = ");
+		System.out.println("${catalog-service.service.host:catalog}") ;
+		
+		System.out.println("catalog-service.service.host:catalog-service value = ");
+		System.out.println("${catalog-service.service.host:catalog-service}") ;
+		
 		System.out.println("catalogServiceHost value = ");
 		System.out.println(catalogServiceHost) ;
 		
 		System.out.println("======================================================");
 		System.out.println("catalog.service.port:8080 value = ");
 		System.out.println("${catalog.service.port:8080}") ;
+		
+		System.out.println("catalog-service.service.port:8080 value = ");
+		System.out.println("${catalog-service.service.port:8080}") ;
 		
 		System.out.println("catalogServicePort value = ");
 		System.out.println(catalogServicePort) ;	
