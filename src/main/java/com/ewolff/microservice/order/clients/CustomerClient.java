@@ -35,13 +35,23 @@ public class CustomerClient {
 	}
 
 	@Autowired
-//	public CustomerClient(@Value("${customer.service.host:customer}") String customerServiceHost,
-//			@Value("${customer.service.port:8080}") long customerServicePort) {
-	public CustomerClient(@Value("customer-service") String customerServiceHost, @Value("8080") long customerServicePort) {
+	// this will look for application properties first then use the default value after the colon
+	public CustomerClient(@Value("${customer.service.host:customer-service}") String customerServiceHost,
+			@Value("${customer.service.port:8080}") long customerServicePort) {
+//	public CustomerClient(@Value("customer-service") String customerServiceHost, @Value("8080") long customerServicePort) {
 		super();
 		this.restTemplate = getRestTemplate();
 		this.customerServiceHost = customerServiceHost;
 		this.customerServicePort = customerServicePort;
+		
+		System.out.println("======================================================");
+		System.out.println("catalogServiceHost value = ");
+		System.out.println(catalogServiceHost) ;
+		System.out.println("======================================================");
+		System.out.println("catalogServicePort value = ");
+		System.out.println(catalogServicePort) ;
+		System.out.println("======================================================");
+		
 	}
 
 	public boolean isValidCustomerId(long customerId) {
