@@ -36,9 +36,9 @@ public class CustomerClient {
 
 	@Autowired
 	// this will look for application properties first then use the default value after the colon
-	public CustomerClient(@Value("${customer.service.host:customer-service}") String customerServiceHost,
-			@Value("${customer.service.port:8080}") long customerServicePort) {
-//	public CustomerClient(@Value("customer-service") String customerServiceHost, @Value("8080") long customerServicePort) {
+//	public CustomerClient(@Value("${customer.service.host:customer-service}") String customerServiceHost,
+//			@Value("${customer.service.port:8080}") long customerServicePort) {
+	public CustomerClient(@Value("customer-service") String customerServiceHost, @Value("8080") long customerServicePort) {
 		super();
 
 		System.out.println("======================================================");
