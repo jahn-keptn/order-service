@@ -33,9 +33,10 @@ public class CatalogClient {
 	private long catalogServicePort;
 
 	@Autowired
-//	public CatalogClient(@Value("${catalog.service.host:catalog}") String catalogServiceHost,
-//			@Value("${catalog.service.port:8080}") long catalogServicePort) {
-	public CatalogClient(@Value("catalog-service") String catalogServiceHost, @Value("8080") long catalogServicePort) {
+	// this will look for application properties first then use the default value after the colon
+	public CatalogClient(@Value("${catalog.service.host:catalog-service}") String catalogServiceHost,
+			@Value("${catalog.service.port:8080}") long catalogServicePort) {
+//	public CatalogClient(@Value("catalog-service") String catalogServiceHost, @Value("8080") long catalogServicePort) {
 		super();
 		this.restTemplate = getRestTemplate();
 		this.catalogServiceHost = catalogServiceHost;
@@ -55,6 +56,7 @@ public class CatalogClient {
 		System.out.println("catalog-service.service.host:catalog-service value = ");
 		System.out.println(@Value("${catalog-service.service.host:catalog-service}")) ;
 		*/
+		
 		System.out.println("catalogServiceHost value = ");
 		System.out.println(catalogServiceHost) ;
 		
