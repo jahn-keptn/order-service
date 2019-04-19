@@ -39,11 +39,7 @@ public class CustomerClient {
 	public CustomerClient(@Value("${customer.service.host:customer-service}") String customerServiceHost,
 			@Value("${customer.service.port:8080}") long customerServicePort) {
 //	public CustomerClient(@Value("customer-service") String customerServiceHost, @Value("8080") long customerServicePort) {
-		super();
-		this.restTemplate = getRestTemplate();
-		this.customerServiceHost = customerServiceHost;
-		this.customerServicePort = customerServicePort;
-		
+
 		System.out.println("======================================================");
 		System.out.println("customerServiceHost value = ");
 		System.out.println(customerServiceHost) ;
@@ -51,7 +47,11 @@ public class CustomerClient {
 		System.out.println("customerServicePort value = ");
 		System.out.println(customerServicePort);
 		System.out.println("======================================================");
-		
+
+		super();
+		this.restTemplate = getRestTemplate();
+		this.customerServiceHost = customerServiceHost;
+		this.customerServicePort = customerServicePort;
 	}
 
 	public boolean isValidCustomerId(long customerId) {
