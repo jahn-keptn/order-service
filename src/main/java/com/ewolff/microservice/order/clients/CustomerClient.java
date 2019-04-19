@@ -49,7 +49,7 @@ public class CustomerClient {
 		System.out.println(catalogServiceHost) ;
 		System.out.println("======================================================");
 		System.out.println("catalogServicePort value = ");
-		System.out.println(catalogServicePort) ;
+		System.out.println(catalogServicePort);
 		System.out.println("======================================================");
 		
 	}
