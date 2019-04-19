@@ -45,11 +45,11 @@ public class CustomerClient {
 		this.customerServicePort = customerServicePort;
 		
 		System.out.println("======================================================");
-		System.out.println("catalogServiceHost value = ");
-		System.out.println(catalogServiceHost) ;
+		System.out.println("customerServiceHost value = ");
+		System.out.println(customerServiceHost) ;
 		System.out.println("======================================================");
-		System.out.println("catalogServicePort value = ");
-		System.out.println(catalogServicePort);
+		System.out.println("customerServicePort value = ");
+		System.out.println(customerServicePort);
 		System.out.println("======================================================");
 		
 	}
