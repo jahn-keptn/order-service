@@ -34,9 +34,9 @@ public class CatalogClient {
 
 	@Autowired
 	// this will look for application properties first then use the default value after the colon
-	public CatalogClient(@Value("${catalog.service.host:catalog-service}") String catalogServiceHost,
-			@Value("${catalog.service.port:8080}") long catalogServicePort) {
-//	public CatalogClient(@Value("catalog-service") String catalogServiceHost, @Value("8080") long catalogServicePort) {
+//	public CatalogClient(@Value("${catalog.service.host:catalog-service}") String catalogServiceHost,
+//			@Value("${catalog.service.port:8080}") long catalogServicePort) {
+	public CatalogClient(@Value("catalog-service") String catalogServiceHost, @Value("8080") long catalogServicePort) {
 		super();
 		this.restTemplate = getRestTemplate();
 		this.catalogServiceHost = catalogServiceHost;
